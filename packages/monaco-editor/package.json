@@ -84,12 +84,12 @@
         }
     },
     "optionalDependencies": {
-        "@shikijs/monaco": "^3.7.0",
+        "@shikijs/monaco": "^4.0.2",
         "shiki": "^3.7.0"
     },
     "devDependencies": {
         "@shikijs/langs": "^3.21.0",
-        "@shikijs/monaco": "^3.7.0",
+        "@shikijs/monaco": "^4.0.2",
         "@shikijs/themes": "^3.21.0",
         "@sigx/vite": "^0.4.1",
         "@types/node": "^22.19.1",
