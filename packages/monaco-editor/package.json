@@ -1,37 +1,37 @@
 {
     "name": "@sigx/monaco-editor",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Pluggable Monaco editor wrapper for sigx with prebundled assets and a Vite plugin that bypasses bundler optimization",
     "type": "module",
-    "main": "./src/index.ts",
+    "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./src/index.ts",
+            "import": "./dist/index.js",
             "types": "./dist/index.d.ts"
         },
         "./vite": {
-            "import": "./src/vite-plugin.ts",
+            "import": "./dist/vite-plugin.js",
             "types": "./dist/vite-plugin.d.ts"
         },
         "./shiki": {
-            "import": "./src/shiki/index.ts",
+            "import": "./dist/shiki/index.js",
             "types": "./dist/shiki/index.d.ts"
         },
         "./languages/typescript": {
-            "import": "./src/languages/typescript.ts",
+            "import": "./dist/languages/typescript.js",
             "types": "./dist/languages/typescript.d.ts"
         },
         "./languages/html": {
-            "import": "./src/languages/html.ts",
+            "import": "./dist/languages/html.js",
             "types": "./dist/languages/html.d.ts"
         },
         "./languages/css": {
-            "import": "./src/languages/css.ts",
+            "import": "./dist/languages/css.js",
             "types": "./dist/languages/css.d.ts"
         },
         "./languages/json": {
-            "import": "./src/languages/json.ts",
+            "import": "./dist/languages/json.js",
             "types": "./dist/languages/json.d.ts"
         },
         "./monaco-bundle/*": {
