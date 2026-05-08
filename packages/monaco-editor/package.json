@@ -85,7 +85,7 @@
     },
     "optionalDependencies": {
         "@shikijs/monaco": "^3.7.0",
-        "shiki": "^3.7.0"
+        "shiki": "^4.0.2"
     },
     "devDependencies": {
         "@shikijs/langs": "^3.21.0",
@@ -95,7 +95,7 @@
         "@types/node": "^22.19.1",
         "esbuild": "^0.27.0",
         "monaco-editor": "^0.55.1",
-        "shiki": "^3.7.0",
+        "shiki": "^4.0.2",
         "sigx": "^0.4.1",
         "tsx": "^4.19.0",
         "typescript": "^5.9.3",
