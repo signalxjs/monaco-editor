@@ -1,0 +1,104 @@
+{
+    "name": "@sigx/monaco-editor",
+    "version": "0.1.0",
+    "description": "Pluggable Monaco editor wrapper for sigx with prebundled assets and a Vite plugin that bypasses bundler optimization",
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./dist/index.d.ts"
+        },
+        "./vite": {
+            "import": "./src/vite-plugin.ts",
+            "types": "./dist/vite-plugin.d.ts"
+        },
+        "./shiki": {
+            "import": "./src/shiki/index.ts",
+            "types": "./dist/shiki/index.d.ts"
+        },
+        "./languages/typescript": {
+            "import": "./src/languages/typescript.ts",
+            "types": "./dist/languages/typescript.d.ts"
+        },
+        "./languages/html": {
+            "import": "./src/languages/html.ts",
+            "types": "./dist/languages/html.d.ts"
+        },
+        "./languages/css": {
+            "import": "./src/languages/css.ts",
+            "types": "./dist/languages/css.d.ts"
+        },
+        "./languages/json": {
+            "import": "./src/languages/json.ts",
+            "types": "./dist/languages/json.d.ts"
+        },
+        "./monaco-bundle/*": {
+            "import": "./public/monaco-bundle/*"
+        }
+    },
+    "files": [
+        "dist",
+        "src",
+        "public"
+    ],
+    "scripts": {
+        "build": "vite build && tsgo --emitDeclarationOnly",
+        "dev": "vite build --watch",
+        "bundle:monaco": "tsx scripts/bundle-monaco.ts"
+    },
+    "keywords": [
+        "sigx",
+        "monaco",
+        "monaco-editor",
+        "code-editor",
+        "vite-plugin"
+    ],
+    "author": "Andreas Ekdahl",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/signalxjs/monaco-editor.git",
+        "directory": "packages/monaco-editor"
+    },
+    "homepage": "https://github.com/signalxjs/monaco-editor/tree/main/packages/monaco-editor",
+    "bugs": {
+        "url": "https://github.com/signalxjs/monaco-editor/issues"
+    },
+    "peerDependencies": {
+        "monaco-editor": ">=0.50.0",
+        "sigx": ">=0.4.0",
+        "vite": ">=5.0.0"
+    },
+    "peerDependenciesMeta": {
+        "monaco-editor": {
+            "optional": true
+        },
+        "vite": {
+            "optional": true
+        }
+    },
+    "optionalDependencies": {
+        "@shikijs/monaco": "^3.7.0",
+        "shiki": "^3.7.0"
+    },
+    "devDependencies": {
+        "@shikijs/langs": "^3.21.0",
+        "@shikijs/monaco": "^3.7.0",
+        "@shikijs/themes": "^3.21.0",
+        "@sigx/vite": "^0.4.1",
+        "@types/node": "^22.19.1",
+        "esbuild": "^0.27.0",
+        "monaco-editor": "^0.55.1",
+        "shiki": "^3.7.0",
+        "sigx": "^0.4.1",
+        "tsx": "^4.19.0",
+        "typescript": "^5.9.3",
+        "vite": "^8.0.3"
+    }
+}

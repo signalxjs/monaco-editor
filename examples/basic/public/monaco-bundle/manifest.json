@@ -1,0 +1,19 @@
+{
+  "version": "0.55.1",
+  "generated": "2026-05-06T10:10:18.556Z",
+  "workers": [
+    "ts.worker",
+    "css.worker",
+    "html.worker",
+    "json.worker"
+  ],
+  "files": [
+    "monaco.min.js",
+    "monaco.min.css",
+    "editor.worker.min.js",
+    "ts.worker.min.js",
+    "css.worker.min.js",
+    "html.worker.min.js",
+    "json.worker.min.js"
+  ]
+}

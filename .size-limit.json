@@ -1,0 +1,14 @@
+[
+  {
+    "name": "@sigx/monaco-editor (loader + component)",
+    "path": "packages/monaco-editor/dist/index.js",
+    "limit": "18 KB",
+    "ignore": ["sigx", "monaco-editor", "shiki", "@shikijs/monaco"]
+  },
+  {
+    "name": "@sigx/monaco-editor/vite",
+    "path": "packages/monaco-editor/dist/vite-plugin.js",
+    "limit": "8 KB",
+    "ignore": ["vite", "fs", "path", "url", "node:fs", "node:path", "node:url"]
+  }
+]

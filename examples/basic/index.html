@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@sigx/monaco-editor — basic example</title>
+        <style>
+            html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; background: #1e1e1e; color: #ddd; }
+            #app { height: 100vh; display: flex; flex-direction: column; }
+            header { padding: 12px 16px; background: #252526; border-bottom: 1px solid #333; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+            header h1 { font-size: 14px; margin: 0 16px 0 0; font-weight: 500; }
+            header label { font-size: 12px; color: #aaa; display: flex; align-items: center; gap: 6px; }
+            header select, header button { background: #3c3c3c; color: #ddd; border: 1px solid #555; padding: 4px 10px; border-radius: 3px; font-size: 12px; cursor: pointer; }
+            .editor-wrap { flex: 1; min-height: 0; }
+        </style>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="module" src="/App.tsx"></script>
+    </body>
+</html>

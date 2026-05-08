@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "sigx",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "paths": {
+            "@sigx/monaco-editor": ["./packages/monaco-editor/src/index.ts"],
+            "@sigx/monaco-editor/vite": ["./packages/monaco-editor/src/vite-plugin.ts"],
+            "@sigx/monaco-editor/shiki": ["./packages/monaco-editor/src/shiki/index.ts"],
+            "@sigx/monaco-editor/languages/typescript": ["./packages/monaco-editor/src/languages/typescript.ts"],
+            "@sigx/monaco-editor/languages/html": ["./packages/monaco-editor/src/languages/html.ts"],
+            "@sigx/monaco-editor/languages/css": ["./packages/monaco-editor/src/languages/css.ts"],
+            "@sigx/monaco-editor/languages/json": ["./packages/monaco-editor/src/languages/json.ts"]
+        }
+    },
+    "exclude": ["node_modules", "**/dist"]
+}
