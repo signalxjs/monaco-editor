@@ -34,7 +34,7 @@
     },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^11",
-        "@typescript/native-preview": "7.0.0-dev.20260507.1",
+        "@typescript/native-preview": "7.0.0-dev.20260508.1",
         "oxlint": "^1.63.0",
         "size-limit": "^11",
         "typescript": "^5.9.3",
