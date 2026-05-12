@@ -1,6 +1,6 @@
 {
     "name": "@sigx/monaco-editor",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Pluggable Monaco editor wrapper for sigx with prebundled assets and a Vite plugin that bypasses bundler optimization",
     "type": "module",
     "main": "./dist/index.js",
@@ -91,12 +91,12 @@
         "@shikijs/langs": "^3.21.0",
         "@shikijs/monaco": "^3.7.0",
         "@shikijs/themes": "^3.21.0",
-        "@sigx/vite": "^0.4.1",
+        "@sigx/vite": "^0.4.3",
         "@types/node": "^22.19.1",
         "esbuild": "^0.27.0",
         "monaco-editor": "^0.55.1",
         "shiki": "^3.7.0",
-        "sigx": "^0.4.1",
+        "sigx": "^0.4.3",
         "tsx": "^4.19.0",
         "typescript": "^5.9.3",
         "vite": "^8.0.3"

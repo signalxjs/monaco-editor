@@ -33,12 +33,12 @@ importers:
         specifier: workspace:^
         version: link:../../packages/monaco-editor
       sigx:
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.4.3
+        version: 0.4.3
     devDependencies:
       '@sigx/vite':
-        specifier: ^0.4.1
-        version: 0.4.1(sigx@0.4.1)(vite@8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0))
+        specifier: ^0.4.3
+        version: 0.4.3(sigx@0.4.3)(vite@8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0))
       monaco-editor:
         specifier: ^0.55.1
         version: 0.55.1
@@ -58,8 +58,8 @@ importers:
         specifier: ^3.21.0
         version: 3.23.0
       '@sigx/vite':
-        specifier: ^0.4.1
-        version: 0.4.1(sigx@0.4.1)(vite@8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0))
+        specifier: ^0.4.3
+        version: 0.4.3(sigx@0.4.3)(vite@8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0))
       '@types/node':
         specifier: ^22.19.1
         version: 22.19.18
@@ -70,8 +70,8 @@ importers:
         specifier: ^0.55.1
         version: 0.55.1
       sigx:
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.4.3
+        version: 0.4.3
       tsx:
         specifier: ^4.19.0
         version: 4.21.0
@@ -668,20 +668,20 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
-  '@sigx/reactivity@0.4.1':
-    resolution: {integrity: sha512-p4/GDONCJwFKoaAf/nccvpNJ+7rfafjrbfQ+yc0xnziKLFmQTFyD1dPdnLr+pC9HwiBmIRhZzqL5sEKbHQwj3Q==}
+  '@sigx/reactivity@0.4.3':
+    resolution: {integrity: sha512-S6nCZuwRGsPSvGrLXLxRSJzVFIPdWAIbSu4gKAglNxuq5V3A2aH9SdHE/wSqz0lTzA4qrIRR2wSbi3bnOMjKOg==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@sigx/runtime-core@0.4.1':
-    resolution: {integrity: sha512-gakdVKwb2c2OUj9I8lEaJaIVLD19L4tWLVioWPhuC/pmOjV8Cv5Balvvb2lz2HlRn/Onj2voYeRpzkZg5glOIw==}
+  '@sigx/runtime-core@0.4.3':
+    resolution: {integrity: sha512-KVvlFFMzhl0xFhE4p1Liy0R2LPebDS3ckWk8I6kplbw/t6kb4Jsr0k19Hy7IoWhfZ84yD1EhvAHDyXvIU1wmOQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@sigx/runtime-dom@0.4.1':
-    resolution: {integrity: sha512-kcYE2OTTjlBzAkAcvewXvTX+osEuheZ4qcSLejUpspez1PVnTRZOJOdduuXdGOmd+7NrC00MOBOWU/yrCl1lNA==}
+  '@sigx/runtime-dom@0.4.3':
+    resolution: {integrity: sha512-1G5PC5xSdNgdiUjNKnm1mIg6+QYmt1S9nQIkR2ON0vz+rsvAGeysTEwM3PCUe98HHBpqrkIk/9iqH2VRUd5BCA==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@sigx/vite@0.4.1':
-    resolution: {integrity: sha512-WB1C4TjxFsL68gVzmean//ZPVH3uI1yTnZgZQxe0TO0rsNnLW9eGQVsExL1wRQ7Ku11P1z3zRbee1ug/IeicDQ==}
+  '@sigx/vite@0.4.3':
+    resolution: {integrity: sha512-rce7KVn9PQCdfBm0zC4zMvwPdGfjWN5J7Y5ZGA3/72iD2i63cFYIAmm5i808vLKsNFTC9T9SLDOYTT/8lnESQQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       sigx: '*'
@@ -1091,8 +1091,8 @@ packages:
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
-  sigx@0.4.1:
-    resolution: {integrity: sha512-L5plzCmbXlMfXJUFf8m4KsT8JqlnFoJZjzC9tYuCofw5t4qrEGuRACRRTZBFlooqJqkBuurQJxkOTZh1nmXPUg==}
+  sigx@0.4.3:
+    resolution: {integrity: sha512-FCi5UlyRvi+fnOrYPou8yiBpvvobSSNF/aHvwBEsxBlC6OGrhrvp4z8+F8TazoUEbW0TtCby9ntwaDxJCezM7g==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
   size-limit@11.2.0:
@@ -1599,20 +1599,20 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@sigx/reactivity@0.4.1': {}
+  '@sigx/reactivity@0.4.3': {}
 
-  '@sigx/runtime-core@0.4.1':
+  '@sigx/runtime-core@0.4.3':
     dependencies:
-      '@sigx/reactivity': 0.4.1
+      '@sigx/reactivity': 0.4.3
 
-  '@sigx/runtime-dom@0.4.1':
+  '@sigx/runtime-dom@0.4.3':
     dependencies:
-      '@sigx/reactivity': 0.4.1
-      '@sigx/runtime-core': 0.4.1
+      '@sigx/reactivity': 0.4.3
+      '@sigx/runtime-core': 0.4.3
 
-  '@sigx/vite@0.4.1(sigx@0.4.1)(vite@8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0))':
+  '@sigx/vite@0.4.3(sigx@0.4.3)(vite@8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0))':
     dependencies:
-      sigx: 0.4.1
+      sigx: 0.4.3
       vite: 8.0.11(@types/node@22.19.18)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.21.0)
 
   '@size-limit/esbuild@11.2.0(size-limit@11.2.0)':
@@ -2086,11 +2086,11 @@ snapshots:
 
   siginfo@2.0.0: {}
 
-  sigx@0.4.1:
+  sigx@0.4.3:
     dependencies:
-      '@sigx/reactivity': 0.4.1
-      '@sigx/runtime-core': 0.4.1
-      '@sigx/runtime-dom': 0.4.1
+      '@sigx/reactivity': 0.4.3
+      '@sigx/runtime-core': 0.4.3
+      '@sigx/runtime-dom': 0.4.3
 
   size-limit@11.2.0:
     dependencies:
