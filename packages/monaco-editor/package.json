@@ -91,14 +91,14 @@
         "@shikijs/langs": "^3.21.0",
         "@shikijs/monaco": "^3.7.0",
         "@shikijs/themes": "^3.21.0",
-        "@sigx/vite": "^0.4.3",
+        "@sigx/vite": "^0.4.8",
         "@types/node": "^22.19.1",
-        "esbuild": "^0.27.0",
+        "esbuild": "^0.28.0",
         "monaco-editor": "^0.55.1",
         "shiki": "^3.7.0",
         "sigx": "^0.4.3",
-        "tsx": "^4.19.0",
+        "tsx": "^4.22.0",
         "typescript": "^5.9.3",
-        "vite": "^8.0.3"
+        "vite": "^8.0.13"
     }
 }

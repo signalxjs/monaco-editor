@@ -12,9 +12,9 @@
         "sigx": "^0.4.3"
     },
     "devDependencies": {
-        "@sigx/vite": "^0.4.3",
+        "@sigx/vite": "^0.4.8",
         "monaco-editor": "^0.55.1",
         "typescript": "^5.9.3",
-        "vite": "^8.0.3"
+        "vite": "^8.0.13"
     }
 }
