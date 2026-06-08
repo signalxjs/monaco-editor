@@ -13,6 +13,7 @@
         "examples/*"
     ],
     "scripts": {
+        "wt": "node scripts/worktree.mjs",
         "test": "vitest run --passWithNoTests",
         "test:watch": "vitest",
         "build": "pnpm --filter @sigx/monaco-editor run build",
