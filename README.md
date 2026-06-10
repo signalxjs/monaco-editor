@@ -1,6 +1,10 @@
 # @sigx/monaco-editor
 
-A pluggable [Monaco editor](https://microsoft.github.io/monaco-editor/) wrapper for [sigx](https://github.com/signalxjs/core), with a fast dev experience: Monaco is loaded from a pre-bundled, self-contained set of static assets via a `<script>` tag, completely bypassing Vite's dependency optimization.
+A pluggable [Monaco editor](https://microsoft.github.io/monaco-editor/) wrapper for [sigx](https://sigx.dev/core/), with a fast dev experience: Monaco is loaded from a pre-bundled, self-contained set of static assets via a `<script>` tag, completely bypassing Vite's dependency optimization.
+
+## 📚 Documentation
+
+Full guides, API reference and live examples → **<https://sigx.dev/monaco/>**
 
 ## Why this exists
 

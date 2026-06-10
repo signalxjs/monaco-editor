@@ -1,6 +1,10 @@
 # @sigx/monaco-editor
 
-Pluggable [Monaco editor](https://microsoft.github.io/monaco-editor/) wrapper for [sigx](https://github.com/signalxjs/core), with a fast dev experience.
+Pluggable [Monaco editor](https://microsoft.github.io/monaco-editor/) wrapper for [sigx](https://sigx.dev/core/), with a fast dev experience.
+
+## 📚 Documentation
+
+Full guides, API reference and live examples → **<https://sigx.dev/monaco/>**
 
 ## Why
 
@@ -12,27 +16,7 @@ Monaco is large enough that letting Vite pre-bundle it costs many seconds on eve
 pnpm add @sigx/monaco-editor monaco-editor
 ```
 
-## Use
-
-### 1. Add the Vite plugin
-
-```ts
-// vite.config.ts
-import { defineConfig } from 'vite';
-import { monacoPrebundledPlugin } from '@sigx/monaco-editor/vite';
-
-export default defineConfig({
-    plugins: [
-        monacoPrebundledPlugin({
-            strategy: 'prebundled',
-            publicPath: '/monaco-bundle',
-            languages: ['typescript', 'css', 'html', 'json']
-        })
-    ]
-});
-```
-
-### 2. Use the component
+## A taste
 
 ```tsx
 import { component, signal } from 'sigx';
@@ -52,70 +36,15 @@ export const Editor = component(({ signal }) => {
 });
 ```
 
-### 3. Optionally register language packs
+The Vite plugin, loader configuration, language packs, Shiki theming and the full API are documented at **<https://sigx.dev/monaco/>**.
 
-```ts
-import { configureMonaco } from '@sigx/monaco-editor';
-import { typescriptLanguagePack } from '@sigx/monaco-editor/languages/typescript';
-import { jsonLanguagePack } from '@sigx/monaco-editor/languages/json';
+## Part of SignalX
 
-configureMonaco({
-    languages: [
-        typescriptLanguagePack({ jsxImportSource: 'sigx' }),
-        jsonLanguagePack()
-    ]
-});
-```
+- [sigx](https://sigx.dev/core/) — the reactive core.
+- [@sigx/vite](https://sigx.dev/vite/) — the Vite integration.
+- [@sigx/live-code](https://sigx.dev/) — runnable code examples.
 
-### 4. Optionally use Shiki for nicer TextMate highlighting
-
-```ts
-import { applyShikiThemes } from '@sigx/monaco-editor/shiki';
-
-await applyShikiThemes(monaco, {
-    themes: ['github-dark', 'github-light'],
-    langs: ['tsx', 'typescript', 'jsx', 'javascript']
-});
-```
-
-## Pre-bundling
-
-The package ships a pre-built `public/monaco-bundle/`. To regenerate it (e.g. after upgrading Monaco):
-
-```bash
-pnpm bundle:monaco
-```
-
-You can configure which workers to bundle:
-
-```bash
-pnpm bundle:monaco --workers typescript,json
-```
-
-## API
-
-### Loader
-
-| | |
-|---|---|
-| `loadMonaco()` | Lazy-load Monaco using the configured strategy. Returns the Monaco namespace. |
-| `configureMonacoLoader(config)` | Override the load strategy / base path / CDN URL before first call. |
-| `isMonacoLoaded()` | `true` once Monaco is in memory. |
-| `getMonaco()` | Synchronous accessor; throws if not loaded. |
-
-### Setup
-
-| | |
-|---|---|
-| `configureMonaco({ languages, themes, extraLibs })` | Register language packs, themes, and extra `.d.ts` libs to apply when Monaco loads. |
-| `createEditor({ container, value, language, theme, onChange, ... })` | Imperative low-level API. |
-| `<MonacoEditor />` | sigx component wrapper. |
-
-### Vite plugin (`@sigx/monaco-editor/vite`)
-
-| | |
-|---|---|
-| `monacoPrebundledPlugin({ strategy, publicPath, languages, cdnUrl, version })` | Intercepts `monaco-editor` imports, copies the bundle to `public/`, injects loader config. |
+Browse the whole ecosystem at **<https://sigx.dev>**.
 
 ## License
 
