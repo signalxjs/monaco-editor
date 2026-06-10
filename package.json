@@ -54,7 +54,7 @@
         "type": "git",
         "url": "git+https://github.com/signalxjs/monaco-editor.git"
     },
-    "homepage": "https://github.com/signalxjs/monaco-editor",
+    "homepage": "https://sigx.dev/monaco/",
     "bugs": {
         "url": "https://github.com/signalxjs/monaco-editor/issues"
     }
