@@ -9,7 +9,7 @@
     },
     "dependencies": {
         "@sigx/monaco-editor": "workspace:^",
-        "sigx": "^0.4.9"
+        "sigx": "^0.6.0"
     },
     "devDependencies": {
         "@sigx/vite": "^0.4.3",
