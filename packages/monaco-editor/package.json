@@ -72,7 +72,7 @@
     },
     "peerDependencies": {
         "monaco-editor": ">=0.50.0",
-        "sigx": ">=0.4.0",
+        "sigx": ">=0.7.0",
         "vite": ">=5.0.0"
     },
     "peerDependenciesMeta": {
@@ -91,12 +91,12 @@
         "@shikijs/langs": "^3.21.0",
         "@shikijs/monaco": "^3.7.0",
         "@shikijs/themes": "^3.21.0",
-        "@sigx/vite": "^0.4.3",
+        "@sigx/vite": "^0.7.0",
         "@types/node": "^22.19.1",
         "esbuild": "^0.27.0",
         "monaco-editor": "^0.55.1",
         "shiki": "^3.7.0",
-        "sigx": "^0.4.9",
+        "sigx": "^0.7.0",
         "tsx": "^4.19.0",
         "typescript": "^5.9.3",
         "vite": "^8.0.3"

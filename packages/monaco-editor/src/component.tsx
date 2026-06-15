@@ -1,10 +1,15 @@
 import { component, onMounted, onUnmounted, watch } from 'sigx';
+import type { Define } from 'sigx';
 import { createEditor } from './create-editor';
 import type { MonacoEditor as MonacoEditorInstance, MonacoEditorConstructionOptions } from './types';
 
-export interface MonacoEditorProps {
-    /** Editor value. Reactive. */
-    value: string;
+export interface MonacoEditorProps extends Define.Model<string> {
+    /**
+     * Editor value. Reactive. Use this for one-way binding paired with
+     * `onChange`. For two-way binding, prefer `model` instead — when `model`
+     * is supplied it takes precedence over `value`.
+     */
+    value?: string;
     /** Language id. Reactive. */
     language?: string;
     /** Theme id. Reactive. */
@@ -33,11 +38,48 @@ export interface MonacoEditorProps {
  * `<MonacoEditor />` — a thin sigx wrapper over `createEditor`. Lazy-loads
  * Monaco on mount, mirrors prop changes onto the live editor, disposes on
  * unmount.
+ *
+ * Supports two binding styles for the content:
+ *   - One-way: `value={state.code}` plus `onChange={(v) => state.code = v}`.
+ *   - Two-way: `model={() => state.code}` (or `model={[state, 'code']}`).
+ * When `model` is supplied it is the source of truth and edits are written
+ * back through `props.model.value`.
  */
 export const MonacoEditor = component<MonacoEditorProps>(({ props }) => {
     let containerEl: HTMLDivElement | null = null;
     let editor: MonacoEditorInstance | null = null;
-    let lastValueFromEditor = '';
+    // True while we're pushing an external `value`/`model` change into Monaco.
+    // Monaco fires a content-change event for programmatic `setValue` too, so
+    // this flag lets `emitChange` tell those apart from real user edits and not
+    // echo them back into `model` (which would be redundant and could re-run
+    // custom model setters).
+    let isApplyingExternalValue = false;
+
+    // The effective content, sourced from `model` when present, otherwise the
+    // plain `value` prop. Reading `props.model.value` / `props.value` inside a
+    // tracking scope (e.g. `watch`) makes this reactive.
+    const readValue = (): string => (props.model ? props.model.value : props.value) ?? '';
+
+    // Propagate an editor-originated edit back to the parent: into the two-way
+    // `model` binding when present, and always via `onChange`. Programmatic
+    // updates (see `applyExternalValue`) are ignored so they don't loop.
+    const emitChange = (v: string): void => {
+        if (isApplyingExternalValue) return;
+        if (props.model) props.model.value = v;
+        props.onChange?.(v);
+    };
+
+    // Push an external value into the live editor, guarding the resulting
+    // content-change event so it isn't treated as a user edit.
+    const applyExternalValue = (next: string): void => {
+        if (!editor || editor.getValue() === next) return;
+        isApplyingExternalValue = true;
+        try {
+            editor.setValue(next);
+        } finally {
+            isApplyingExternalValue = false;
+        }
+    };
 
     onMounted(() => {
         if (!containerEl) return;
@@ -49,7 +91,7 @@ export const MonacoEditor = component<MonacoEditorProps>(({ props }) => {
             try {
                 editor = await createEditor({
                     container,
-                    value: props.value,
+                    value: readValue(),
                     language: props.language,
                     theme: props.theme,
                     readOnly: props.readOnly,
@@ -57,12 +99,12 @@ export const MonacoEditor = component<MonacoEditorProps>(({ props }) => {
                     lineNumbers: props.lineNumbers,
                     fontSize: props.fontSize,
                     monacoOptions: props.monacoOptions,
-                    onChange: (v) => {
-                        lastValueFromEditor = v;
-                        props.onChange?.(v);
-                    }
+                    onChange: emitChange
                 });
-                lastValueFromEditor = props.value;
+                // `value`/`model` may have changed while Monaco was loading; the
+                // watch below skipped those updates (editor was still null), so
+                // reconcile the editor to the current value once here.
+                applyExternalValue(readValue());
                 props.onReady?.(editor);
             } catch (err) {
                 console.error('[@sigx/monaco-editor] Failed to create editor:', err);
@@ -75,16 +117,11 @@ export const MonacoEditor = component<MonacoEditorProps>(({ props }) => {
         editor = null;
     });
 
-    // Mirror prop changes onto the live editor.
-    watch(
-        () => props.value,
-        (next) => {
-            // Skip re-applying values that came from the editor itself —
-            // otherwise `onChange` → parent state → `props.value` would loop.
-            if (!editor || next === lastValueFromEditor) return;
-            if (editor.getValue() !== next) editor.setValue(next);
-        }
-    );
+    // Mirror external content changes (via `value` or `model`) onto the live
+    // editor. Edits that originated in the editor are already reflected, so the
+    // `editor.getValue() === next` short-circuit in `applyExternalValue` makes
+    // this a no-op for them.
+    watch(readValue, applyExternalValue);
 
     watch(
         () => props.language,

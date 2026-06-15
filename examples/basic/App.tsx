@@ -72,10 +72,9 @@ const App = component(({ signal }) => {
             </header>
             <div class="editor-wrap">
                 <MonacoEditor
-                    value={state.code}
+                    model={() => state.code}
                     language={state.language}
                     theme={state.theme}
-                    onChange={(v) => state.code = v}
                 />
             </div>
         </>
