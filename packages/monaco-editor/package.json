@@ -1,6 +1,6 @@
 {
     "name": "@sigx/monaco-editor",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "Pluggable Monaco editor wrapper for sigx with prebundled assets and a Vite plugin that bypasses bundler optimization",
     "type": "module",
     "main": "./dist/index.js",
