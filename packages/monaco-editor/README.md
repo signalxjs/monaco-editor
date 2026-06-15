@@ -36,6 +36,18 @@ export const Editor = component(({ signal }) => {
 });
 ```
 
+### Two-way binding (`model`)
+
+Instead of pairing `value` with `onChange`, bind the editor content with sigx's
+two-way `model` directive — edits flow straight back into your state:
+
+```tsx
+<MonacoEditor model={() => state.code} language="typescript" />
+```
+
+When `model` is supplied it is the source of truth and takes precedence over
+`value`. `onChange` still fires if you also pass it.
+
 The Vite plugin, loader configuration, language packs, Shiki theming and the full API are documented at **<https://sigx.dev/monaco/>**.
 
 ## Part of SignalX
