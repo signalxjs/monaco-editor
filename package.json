@@ -13,6 +13,8 @@
         "examples/*"
     ],
     "scripts": {
+        "sync:core": "node scripts/sync-core.mjs",
+        "verify:catalog": "node scripts/check-catalog.mjs",
         "wt": "node scripts/worktree.mjs",
         "test": "vitest run --passWithNoTests",
         "test:watch": "vitest",
