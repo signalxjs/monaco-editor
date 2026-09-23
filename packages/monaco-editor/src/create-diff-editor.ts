@@ -80,11 +80,19 @@ export async function createDiffEditor(options: CreateDiffEditorOptions): Promis
         fixedOverflowWidgets: true
     };
 
-    const editor = monaco.editor.createDiffEditor(options.container, {
-        ...baseOptions,
-        ...options.monacoOptions
-    });
-    editor.setModel({ original, modified });
+    let editor: MonacoDiffEditor;
+    try {
+        editor = monaco.editor.createDiffEditor(options.container, {
+            ...baseOptions,
+            ...options.monacoOptions
+        });
+        editor.setModel({ original, modified });
+    } catch (err) {
+        // Nothing owns the models yet: don't leak them.
+        original.dispose();
+        modified.dispose();
+        throw err;
+    }
 
     // The diff editor does not own models passed to `setModel` — dispose the
     // ones we created when it goes away.

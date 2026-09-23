@@ -59,6 +59,20 @@ describe('createDiffEditor', () => {
         expect(original.disposed && modified.disposed).toBe(true);
     });
 
+    it('disposes its models when the diff editor cannot be created', async () => {
+        const create = monaco.editor.createDiffEditor;
+        monaco.editor.createDiffEditor = () => { throw new Error('boom'); };
+        const before = monaco.models.length;
+        try {
+            await expect(createDiffEditor({ container: document.createElement('div'), original: 'a', modified: 'b' })).rejects.toThrow('boom');
+        } finally {
+            monaco.editor.createDiffEditor = create;
+        }
+        const made = monaco.models.slice(before);
+        expect(made).toHaveLength(2);
+        expect(made.every((m) => m.disposed)).toBe(true);
+    });
+
     it('reports edits of the modified side through onChange', async () => {
         const onChange = vi.fn();
         const editor = await createDiffEditor({
