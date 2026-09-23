@@ -51,8 +51,9 @@ When `model` is supplied it is the source of truth and takes precedence over
 ### Diffs
 
 `<MonacoDiffEditor>` shows two texts side by side (`renderSideBySide`, the
-default) or unified. It is read-only unless `readOnly={false}`, and every prop
-is reactive:
+default) or unified. It is read-only unless `readOnly={false}`. The texts,
+`language`, `theme`, `readOnly`, `renderSideBySide` and `hideUnchangedRegions`
+are reactive; `fontSize` and `monacoOptions` apply at creation:
 
 ```tsx
 import { MonacoDiffEditor, languageForPath } from '@sigx/monaco-editor';

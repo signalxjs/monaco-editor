@@ -42,7 +42,10 @@ export interface CreateDiffEditorOptions {
      * defaults derived from the simpler shorthand fields above.
      */
     monacoOptions?: MonacoDiffEditorConstructionOptions;
-    /** Fires on every edit of the modified side (only when `readOnly` is `false`). */
+    /**
+     * Fires on every content change of the modified side — typing (possible
+     * only with `readOnly: false`) and `setValue` calls alike.
+     */
     onChange?: (value: string) => void;
 }
 

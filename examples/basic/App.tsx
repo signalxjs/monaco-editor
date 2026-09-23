@@ -89,7 +89,16 @@ const App = component(({ signal }) => {
                     </select>
                 </label>
                 <label>
-                    <input type="checkbox" checked={state.diff} onChange={() => state.diff = !state.diff} />
+                    <input
+                        type="checkbox"
+                        checked={state.diff}
+                        onChange={() => {
+                            // Leaving diff mode unmounts the diff editor: drop its note.
+                            zone?.dispose();
+                            zone = null;
+                            state.diff = !state.diff;
+                        }}
+                    />
                     Diff vs sample
                 </label>
                 {state.diff && (

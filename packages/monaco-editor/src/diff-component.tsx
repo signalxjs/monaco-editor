@@ -18,15 +18,18 @@ export interface MonacoDiffEditorProps {
     renderSideBySide?: boolean;
     /** Collapse long unchanged regions. Reactive. */
     hideUnchangedRegions?: boolean | HideUnchangedRegionsOptions;
-    /** Font size. */
+    /** Font size. Applied at creation only. */
     fontSize?: number;
     /** Container className. */
     class?: string;
     /** Inline style for the container. */
     style?: string | Record<string, string | number>;
-    /** Raw Monaco construction options. Merged on top of the simpler shorthands. */
+    /** Raw Monaco construction options, merged on top of the shorthands. Applied at creation only. */
     monacoOptions?: MonacoDiffEditorConstructionOptions;
-    /** Fires on every edit of the modified side (only when `readOnly` is `false`). */
+    /**
+     * Fires when the modified text is edited in the editor (possible only
+     * with `readOnly={false}`); changes pushed in through `modified` do not fire it.
+     */
     onChange?: (value: string) => void;
     /** Fires once with the live diff editor after it is created. */
     onReady?: (editor: MonacoDiffEditorInstance) => void;
