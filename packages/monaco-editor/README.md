@@ -48,6 +48,50 @@ two-way `model` directive — edits flow straight back into your state:
 When `model` is supplied it is the source of truth and takes precedence over
 `value`. `onChange` still fires if you also pass it.
 
+### Diffs
+
+`<MonacoDiffEditor>` shows two texts side by side (`renderSideBySide`, the
+default) or unified. It is read-only unless `readOnly={false}`. The texts,
+`language`, `theme`, `readOnly`, `renderSideBySide` and `hideUnchangedRegions`
+are reactive; `fontSize` and `monacoOptions` apply at creation:
+
+```tsx
+import { MonacoDiffEditor, languageForPath } from '@sigx/monaco-editor';
+
+<MonacoDiffEditor
+    original={state.before}
+    modified={state.after}
+    language={languageForPath(state.path)}
+    renderSideBySide={state.split}
+    hideUnchangedRegions
+    onReady={(diff) => { /* the live IStandaloneDiffEditor */ }}
+/>
+```
+
+`createDiffEditor(options)` is the imperative equivalent of `createEditor`.
+
+### Line actions
+
+These helpers work with a standalone editor and with a diff editor:
+
+- **`onLineNumberClick(editor, cb)`** reports clicks on the line-number gutter as
+  `{ line, side, event }`. In unified view, a click on a deleted line reports the
+  line of the original text.
+- **`mountViewZone(editor, { afterLineNumber, side? }, () => <Comment />)`** mounts
+  a sigx element between two lines. The element keeps its own mouse and keyboard
+  input, and its height follows its content. The call returns a disposer.
+- **`languageForPath(path)`** picks a language id. It reads the extensions of your
+  registered language packs and the extensions of Monaco's built-in languages.
+
+A comment box that opens under the line the user clicks:
+
+```ts
+onLineNumberClick(diff, ({ line, side }) => {
+    zone?.dispose();
+    zone = mountViewZone(diff, { afterLineNumber: line, side }, () => <Comment line={line} />);
+});
+```
+
 The Vite plugin, loader configuration, language packs, Shiki theming and the full API are documented at **<https://sigx.dev/monaco/>**.
 
 ## Part of SignalX

@@ -3,6 +3,11 @@ import type * as Monaco from 'monaco-editor';
 export type MonacoNamespace = typeof Monaco;
 export type MonacoEditor = Monaco.editor.IStandaloneCodeEditor;
 export type MonacoEditorConstructionOptions = Monaco.editor.IStandaloneEditorConstructionOptions;
+export type MonacoDiffEditor = Monaco.editor.IStandaloneDiffEditor;
+export type MonacoDiffEditorConstructionOptions = Monaco.editor.IStandaloneDiffEditorConstructionOptions;
+export type MonacoTextModel = Monaco.editor.ITextModel;
+/** Any single code editor — standalone, or one side of a diff editor. */
+export type MonacoCodeEditor = Monaco.editor.ICodeEditor;
 
 /**
  * A pluggable language registration. Built-in packs live under
