@@ -251,6 +251,19 @@ export function getMonaco(): typeof Monaco {
     return monacoInstance;
 }
 
+/**
+ * Language packs registered through `configureMonaco()` so far, in
+ * registration order. Internal: used by `languageForPath`.
+ */
+export function registeredLanguagePacks(): readonly LanguagePack[] {
+    return pendingSetup.languages;
+}
+
+/** The loaded Monaco instance, or `null` before `loadMonaco()` has resolved. */
+export function peekMonaco(): typeof Monaco | null {
+    return monacoInstance;
+}
+
 export function getLoaderConfig(): MonacoLoaderConfig {
     return { ...loaderConfig };
 }

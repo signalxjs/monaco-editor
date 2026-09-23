@@ -21,14 +21,39 @@ export {
 // Imperative editor creation
 export { createEditor, type CreateEditorOptions } from './create-editor';
 
-// sigx component
+// Imperative diff editor creation
+export {
+    createDiffEditor,
+    type CreateDiffEditorOptions,
+    type HideUnchangedRegionsOptions
+} from './create-diff-editor';
+
+// sigx components
 export { MonacoEditor, type MonacoEditorProps } from './component';
+export { MonacoDiffEditor, type MonacoDiffEditorProps } from './diff-component';
+
+// Helpers for editors and diff editors
+export {
+    onLineNumberClick,
+    mountViewZone,
+    languageForPath,
+    isSideBySide,
+    modifiedAnchorFor,
+    type Disposer,
+    type DiffSide,
+    type LineNumberClick,
+    type ViewZoneOptions
+} from './helpers';
 
 // Shared types
 export type {
     MonacoNamespace,
     MonacoEditor as MonacoEditorInstance,
     MonacoEditorConstructionOptions,
+    MonacoDiffEditor as MonacoDiffEditorInstance,
+    MonacoDiffEditorConstructionOptions,
+    MonacoCodeEditor,
+    MonacoTextModel,
     LanguagePack,
     ThemePack,
     ExtraLib

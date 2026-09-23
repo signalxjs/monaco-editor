@@ -7,7 +7,7 @@
  */
 
 import { loadMonaco } from './loader';
-import type { MonacoEditor, MonacoEditorConstructionOptions } from './types';
+import type { MonacoEditor, MonacoEditorConstructionOptions, MonacoNamespace, MonacoTextModel } from './types';
 
 let modelCounter = 0;
 
@@ -36,7 +36,7 @@ export interface CreateEditorOptions {
  * input language. Required so Monaco's TypeScript worker picks the right
  * script kind (TS vs TSX vs JS vs JSX).
  */
-function resolveLanguage(lang: string): {
+export function resolveLanguage(lang: string): {
     extension: string;
     initialLangId: string;
     finalLangId: string;
@@ -57,23 +57,32 @@ function resolveLanguage(lang: string): {
     return { extension: '', initialLangId: lang, finalLangId: lang, needsLanguageSwap: false };
 }
 
-export async function createEditor(options: CreateEditorOptions): Promise<MonacoEditor> {
-    const monaco = await loadMonaco();
-
-    const lang = options.language ?? 'typescript';
+/**
+ * Create a Monaco text model for `value` in `lang`, applying the TSX/JSX
+ * language swap described above. Shared by `createEditor` and
+ * `createDiffEditor`.
+ */
+export function createModelFor(monaco: MonacoNamespace, value: string, lang: string): MonacoTextModel {
     const { extension, initialLangId, finalLangId, needsLanguageSwap } = resolveLanguage(lang);
 
     const modelUri = monaco.Uri.parse(
         `file:///playground-${++modelCounter}${extension || ''}`
     );
 
-    const model = monaco.editor.createModel(options.value, initialLangId, modelUri);
+    const model = monaco.editor.createModel(value, initialLangId, modelUri);
 
     // Swap to the highlight-friendly language id (e.g. 'tsx') *after* the model
     // has been registered with the TS worker for IntelliSense.
     if (needsLanguageSwap) {
         monaco.editor.setModelLanguage(model, finalLangId);
     }
+    return model;
+}
+
+export async function createEditor(options: CreateEditorOptions): Promise<MonacoEditor> {
+    const monaco = await loadMonaco();
+
+    const model = createModelFor(monaco, options.value, options.language ?? 'typescript');
 
     const baseOptions: MonacoEditorConstructionOptions = {
         model,

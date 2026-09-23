@@ -1,6 +1,11 @@
 import { component, render, signal } from 'sigx';
 import {
     MonacoEditor,
+    MonacoDiffEditor,
+    mountViewZone,
+    onLineNumberClick,
+    type Disposer,
+    type MonacoDiffEditorInstance,
     configureMonaco,
     typescriptLanguagePack,
     cssLanguagePack,
@@ -31,8 +36,25 @@ const App = component(({ signal }) => {
     const state = signal({
         language: 'typescript',
         theme: 'vs-dark',
-        code: SAMPLES.typescript
+        code: SAMPLES.typescript,
+        // Diff mode compares the language's sample with your edits.
+        diff: false,
+        split: true
     });
+
+    // In diff mode, clicking a line number opens a note under that line.
+    let zone: Disposer | null = null;
+    function wireDiff(editor: MonacoDiffEditorInstance): void {
+        onLineNumberClick(editor, ({ line, side }) => {
+            zone?.dispose();
+            zone = mountViewZone(editor, { afterLineNumber: line, side }, () => (
+                <div style="padding: 8px 12px; background: #252526; border: 1px solid #555;">
+                    Note on {side} line {line}{' '}
+                    <button onClick={() => { zone?.dispose(); zone = null; }}>Close</button>
+                </div>
+            ));
+        });
+    }
 
     function setLanguage(lang: string): void {
         state.language = lang;
@@ -66,16 +88,48 @@ const App = component(({ signal }) => {
                         <option value="hc-black">hc-black</option>
                     </select>
                 </label>
+                <label>
+                    <input type="checkbox" checked={state.diff} onChange={() => state.diff = !state.diff} />
+                    Diff vs sample
+                </label>
+                {state.diff && (
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={state.split}
+                            onChange={() => {
+                                // Zone placement depends on the view: close the note.
+                                zone?.dispose();
+                                zone = null;
+                                state.split = !state.split;
+                            }}
+                        />
+                        Split
+                    </label>
+                )}
                 <label style="margin-left: auto;">
                     chars: {state.code.length}
                 </label>
             </header>
             <div class="editor-wrap">
-                <MonacoEditor
-                    model={() => state.code}
-                    language={state.language}
-                    theme={state.theme}
-                />
+                {state.diff
+                    ? (
+                        <MonacoDiffEditor
+                            original={SAMPLES[state.language] ?? ''}
+                            modified={state.code}
+                            language={state.language}
+                            theme={state.theme}
+                            renderSideBySide={state.split}
+                            onReady={wireDiff}
+                        />
+                    )
+                    : (
+                        <MonacoEditor
+                            model={() => state.code}
+                            language={state.language}
+                            theme={state.theme}
+                        />
+                    )}
             </div>
         </>
     );
