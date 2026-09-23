@@ -173,6 +173,19 @@ describe('mountViewZone', () => {
         zone.dispose(); // idempotent
     });
 
+    it('only ignores zone ids of the editor that hosts them', async () => {
+        const a = await createDiffEditor({ container: document.createElement('div'), original: '', modified: '' }) as unknown as FakeDiffEditor;
+        const b = await createDiffEditor({ container: document.createElement('div'), original: '', modified: '' }) as unknown as FakeDiffEditor;
+        mountViewZone(a as any, { afterLineNumber: 1 }, () => <span />);
+        const [idInA] = [...a.modified.zones.keys()];
+        b.lineChanges = [{ originalStartLineNumber: 4, originalEndLineNumber: 4, modifiedStartLineNumber: 4, modifiedEndLineNumber: 4 }];
+        const clicks: unknown[] = [];
+        onLineNumberClick(b as any, ({ line, side }) => clicks.push({ line, side }));
+        // B's own deleted-lines zone happens to share the id of A's zone.
+        b.modified.fireMouseDown({ type: 5, detail: { viewZoneId: idInA, afterLineNumber: 3 } }, 0);
+        expect(clicks).toEqual([{ line: 4, side: 'original' }]);
+    });
+
     it('hosts an original-side zone in the original editor in split view', async () => {
         const editor = await createDiffEditor({ container: document.createElement('div'), original: '', modified: '' }) as unknown as FakeDiffEditor;
         mountViewZone(editor as any, { afterLineNumber: 2, side: 'original' }, () => <span />);

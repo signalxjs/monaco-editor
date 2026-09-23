@@ -29,8 +29,11 @@ function isDiffEditor(editor: MonacoCodeEditor | MonacoDiffEditor): editor is Mo
     return typeof (editor as MonacoDiffEditor).getModifiedEditor === 'function';
 }
 
-/** Ids of view zones mounted by `mountViewZone` — clicks on them are not line clicks. */
-const ownZones = new Set<string>();
+/**
+ * Ids of view zones mounted by `mountViewZone`, per host editor (zone ids are
+ * only unique within one editor) — clicks on them are not line clicks.
+ */
+const ownZones = new WeakMap<MonacoCodeEditor, Set<string>>();
 
 /**
  * Report clicks on the line-number gutter. For a diff editor both sides are
@@ -73,7 +76,7 @@ function watchGutter(
         if (target.type === MouseTargetType.GUTTER_VIEW_ZONE && diff) {
             const detail = target.detail as { viewZoneId?: string; afterLineNumber?: number } | undefined;
             if (!detail || detail.afterLineNumber === undefined) return;
-            if (detail.viewZoneId && ownZones.has(detail.viewZoneId)) return;
+            if (detail.viewZoneId && ownZones.get(editor)?.has(detail.viewZoneId)) return;
             const line = deletedLineAt(monaco, editor, diff, detail.afterLineNumber, event.clientY);
             if (line !== null) callback({ line, side: 'original', event });
         }
@@ -227,7 +230,11 @@ export function mountViewZone(
     host.changeViewZones((accessor) => {
         zoneId = accessor.addZone(zone);
     });
-    if (zoneId) ownZones.add(zoneId);
+    if (zoneId) {
+        let ids = ownZones.get(host);
+        if (!ids) ownZones.set(host, ids = new Set());
+        ids.add(zoneId);
+    }
     host.addOverlayWidget(widget);
     place();
     const layoutListener = host.onDidLayoutChange(place);
@@ -258,7 +265,7 @@ export function mountViewZone(
             host.removeOverlayWidget(widget);
             if (zoneId) {
                 const id = zoneId;
-                ownZones.delete(id);
+                ownZones.get(host)?.delete(id);
                 host.changeViewZones((accessor) => accessor.removeZone(id));
             }
         }
